@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+{% load django_bootstrap5 %}
+{% load static %}
+{% load sass_tags %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ title }}</title>
+
+        {% block styles %}
+            {% bootstrap_css %}
+            <link href="{% static "generator/styles/lib/select2/select2.min.css" %}" rel="stylesheet"/>
+            <link href="{% static "generator/styles/lib/select2/select2-bootstrap-5-theme.min.css" %}" rel="stylesheet"/>
+            <link href="{% sass_src "generator/styles/bootstrap.scss" %}" rel="stylesheet" />
+        {% endblock %}
+
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+    <header>
+        {% include "generator/_navigation.html" %}
+    </header>
+
+    <main class="container p-4 my-4 border">
+        {% bootstrap_messages %}
+
+        <h2>{{ title }}</h2>
+
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+    {% block scripts %}
+
+    {% endblock %}
+    </body>
+</html>

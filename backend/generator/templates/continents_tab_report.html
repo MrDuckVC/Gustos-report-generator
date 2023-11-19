@@ -1,0 +1,120 @@
+<h4>Africa</h4>
+<div>
+    {% if africa_tab_name %}
+    <strong>
+        {{ africa_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in africa_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>Europe</h4>
+<div>
+    {% if europe_tab_name %}
+    <strong>
+        {{ europe_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in europe_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>Asia</h4>
+<div>
+    {% if asia_tab_name %}
+    <strong>
+        {{ asia_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in asia_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>North America</h4>
+<div>
+    {% if north_america_tab_name %}
+    <strong>
+        {{ north_america_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in north_america_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>South America</h4>
+<div>
+    {% if south_america_tab_name %}
+    <strong>
+        {{ south_america_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in south_america_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<h4>Pacific</h4>
+<div>
+    {% if pacific_tab_name %}
+    <strong>
+        {{ pacific_tab_name.upper }}
+    </strong>
+    {% endif %}
+    <table>
+        {% for param, value in pacific_tab %}
+        <tr>
+            <td>
+                {{ param }}:
+            </td>
+            <td>
+                {{ value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

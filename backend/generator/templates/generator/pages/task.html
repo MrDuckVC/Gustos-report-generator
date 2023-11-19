@@ -1,0 +1,106 @@
+{% extends "generator/base.html" %}
+
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Celery ID" %}</label>
+        <strong class="d-block">{{ task.celery_id }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Winery" %}</label>
+        <strong class="d-block">{{ task.winery_name }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Year from" %}</label>
+        <strong class="d-block">{{ task.year_from }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Year to" %}</label>
+        <strong class="d-block">{{ task.year_to }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Created at" %}</label>
+        <strong class="d-block">{{ task.created }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Updated at" %}</label>
+        <strong class="d-block">{{ task.updated }}</strong>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">{% translate "Status" %}</label>
+        {% if task.status == "PENDING" %}
+            <strong class="text-primary d-block">{% translate "Pending" %}</strong>
+        {% elif task.status == "FAILED" %}
+            <strong class="text-danger d-block">{% translate "Failed" %}</strong>
+        {% elif task.status == "IN_PROGRESS" %}
+            <strong class="text-primary d-block">{% translate "In progress" %}</strong>
+        {% elif task.status == "FINISHED" %}
+            <strong class="text-success d-block">{% translate "Finished" %}</strong>
+        {% endif %}
+    </div>
+
+    {% if task.status == "FINISHED" %}
+        <div class="text-center">
+            <a
+                class="btn btn-success"
+                {% if task.file.url %}
+                    href="{{ task.file.url }}"
+                {% else %}
+                    href="{{ MEDIA_URL }}{{ task.file }}"
+                {% endif %}
+                target="_blank"
+            >
+                {% translate "Download" %}
+            </a>
+        </div>
+    {% elif task.status == "IN_PROGRESS" %}
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped" style="width: {{ progress }}%">
+              {{ progress }}%
+          </div>
+        </div>
+    {% endif %}
+
+    <h3 class="mt-3">{% translate "Log" %}</h3>
+
+    <hr/>
+
+    <table class="table table-striped">
+        <colgroup>
+            <col>
+            <col class="col-1">
+            <col class="col-2">
+        </colgroup>
+        <thead>
+        <tr>
+            <th scope="col">{% translate "Message" %}</th>
+            <th scope="col">{% translate "Level" %}</th>
+            <th scope="col">{% translate "Time" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log_entry in log_entries %}
+            <tr>
+                <td>{{ log_entry.message | safe }}</td>
+                <td>
+                    {% if log_entry.level == 40 %}
+                        <span class="badge bg-danger">{% translate "Error" %}</span>
+                    {% elif log_entry.level == 30 %}
+                        <span class="badge bg-warning">{% translate "Warning" %}</span>
+                    {% elif log_entry.level == 20 %}
+                        <span class="badge bg-primary">{% translate "Info" %}</span>
+                    {% else %}
+                        <span class="badge bg-secondary">{% translate "Not set" %}</span>
+                    {% endif %}
+                </td>
+                <td>{{ log_entry.created }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% bootstrap_pagination log_entries %}
+
+{% endblock %}

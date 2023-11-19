@@ -1,0 +1,25 @@
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% translate "Preview" as preview_label %}
+{% translate "Generate" as generate_label %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% bootstrap_field form.winery %}
+    <div class="row">
+        <div class="col">
+            {% bootstrap_field form.year_from %}
+        </div>
+        <div class="col">
+            {% bootstrap_field form.year_to %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-center">
+            {% bootstrap_button generate_label name="op" value="generate" button_class="btn btn-success" %}
+        </div>
+    </div>
+</form>

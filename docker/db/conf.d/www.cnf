@@ -1,0 +1,3 @@
+[mariadbd]
+# "/generate/personal_winery_report/" makes multiple connections to DB in multiple threads.
+max_connections=512

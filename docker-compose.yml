@@ -1,0 +1,53 @@
+version: "3"
+
+networks:
+  redis:
+    driver: bridge
+
+volumes:
+  python_sock:
+  proxy_logs:
+
+services:
+  nginx:
+    restart: unless-stopped
+    image: nginx:alpine
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./backend/static:/var/www/backend/static
+      - ./backend/media:/var/www/backend/media
+      - proxy_logs:/var/log/nginx
+      - python_sock:/var/run/python
+    depends_on:
+      - backend
+
+  backend:
+    restart: unless-stopped
+    image: winetaste/gustos-reports-generator/backend
+    build:
+      context: ./docker/backend
+    volumes:
+      - ./backend:/var/www/backend
+      - python_sock:/var/run/python
+    networks:
+      - redis
+
+  celery:
+    restart: unless-stopped
+    image: winetaste/gustos-reports-generator/backend
+    build:
+      context: ./docker/backend
+    command: [ "celery", "-A", "main", "worker", "--concurrency=3", "-l", "INFO", "-f", "/dev/stderr" ]
+    volumes:
+      - ./backend:/var/www/backend
+    networks:
+      - redis
+    depends_on:
+      - redis
+
+  redis:
+    restart: unless-stopped
+    image: redis:6-alpine
+    networks:
+      - redis

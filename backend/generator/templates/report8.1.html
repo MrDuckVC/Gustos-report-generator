@@ -1,0 +1,209 @@
+{% load static %}
+
+{% block body %}
+{% include "header.html" %}
+
+<div class="container report report-type-1">
+    <table>
+        <tbody>
+            <tr>
+                <td class="top" style="width: 25%;">
+                    <h2 class="mt-6">
+                        {{ report_parameter_title }}
+                    </h2>
+                    <p class="mt-4">
+                        (Wine events {{ year_from }} - {{ year_to }})
+                    </p>
+                    <h1 class="mt-4">
+                        {{ world_current_row_value }}
+                    </h1>
+                </td>
+
+                <td style="width: 3pc;"></td>
+
+                <td>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="block-bb">
+                                    <h2>
+                                        World rating
+                                    </h2>
+                                    <table class="mt-3">
+                                        <tbody>
+                                            {% if world_previous_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ world_previous_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ world_previous_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ world_previous_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            <tr class="text-small strong">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ world_current_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ world_current_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ world_current_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% if world_next_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ world_next_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ world_next_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ world_next_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="block-bb">
+                                    <p class="text-center">
+                                        Your Winery is in Top
+                                    </p>
+                                    <img class="auto-x" src="{{name_svg_world_rating}}" alt="chart" />
+                                    <p class="text-center mb-2-5">
+                                        Of the World
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="block-bb">
+                                    <h2>
+                                        {{ continent_name }} rating
+                                    </h2>
+                                    <table class="mt-3">
+                                        <tbody>
+                                            {% if continent_previous_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ continent_previous_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ continent_previous_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ continent_previous_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            <tr class="text-small strong">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ continent_current_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ continent_current_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ continent_current_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% if continent_next_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ continent_next_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ continent_next_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ continent_next_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="block-bb">
+                                    <p class="text-center mt-2-5">
+                                        Your Winery is in Top
+                                    </p>
+                                    <img class="auto-x" src="{{name_svg_continent_rating}}" alt="chart" />
+                                    <p class="text-center mb-2-5">
+                                        Of the {{ continent_name }}
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h2>
+                                        {{ country_name }} rating
+                                    </h2>
+                                    <table class="mt-3">
+                                        <tbody>
+                                            {% if country_previous_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ country_previous_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ country_previous_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ country_previous_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                            <tr class="text-small strong">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ country_current_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ country_current_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ country_current_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% if country_next_row_rank is not none %}
+                                            <tr class="text-small">
+                                                <td style="width: 15%;" class="top">
+                                                    #{{ country_next_row_rank }}
+                                                </td>
+                                                <td style="width: 75%;" class="top">
+                                                    {{ country_next_row_name }}
+                                                </td>
+                                                <td style="width: 10%; padding: 0 10px;" class="top text-right">
+                                                    {{ country_next_row_value }}
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <p class="text-center mt-2-5">
+                                        Your Winery is in Top
+                                    </p>
+                                    <img class="auto-x" src="{{name_svg_local_rating}}" alt="chart" />
+                                    <p class="text-center">
+                                        Of the {{ country_name }}
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load sass_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{{ title }}</title>
+
+        <!-- css -->
+        <link href="{% sass_src "generator/styles/index.scss" %}" rel="stylesheet" />
+        <link href="{% static "generator/styles/select2/select2.min.css" %}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <nav>
+            <div class="container">
+                <ul class="grid menu">
+                    <li class="menu-item flex">
+                        <a class="navbar-brand text-white" href="{% url "home" %}">
+                            &#x1F3E0; Main page
+                        </a>
+                    </li>
+                    <li class="menu-item flex">
+                        <a class="navbar-brand text-white" href="{% url "personal_report" %}">
+                            Generate Personal Winery Report
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <!-- js -->
+        <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+        <script src="{% static "generator/js/select2/select2.min.js" %}"></script>
+        <script src="{% static "generator/js/basic.js" %}"></script>
+    </body>
+
+</html>

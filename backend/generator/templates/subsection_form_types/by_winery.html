@@ -1,0 +1,32 @@
+<div>
+    <p class="text-maroon">
+        Winery ({{ chose_winery }}):
+    </p>
+    <select name="winery" id="winery">
+        {% if chose_winery_id %}
+            <option value="{{ chose_winery_id }}" selected>{{ chose_winery }}</option>
+        {% endif %}
+    </select>
+</div>
+
+<div>
+    <p class="text-maroon">
+        Year from ({{ chose_year_from }}):
+    </p>
+    <select name="year_from">
+        {% for option in year_from_options %}
+        <option value="{{ option }}" {% if chose_year_from == option %} selected {% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <p class="text-maroon">
+        Year to ({{ chose_year_to }}):
+    </p>
+    <select name="year_to">
+        {% for option in year_to_options %}
+        <option value="{{ option }}" {% if chose_year_to == option %} selected {% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select>
+</div>

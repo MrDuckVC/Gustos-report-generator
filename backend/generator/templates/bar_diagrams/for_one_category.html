@@ -1,0 +1,15 @@
+<div>
+    <b>Attention, all data in percents</b>
+    <br>
+    {% for diagram in page_info %}
+    <div>
+        {% if diagram.image %}
+        <img src="{{ diagram.image }}">
+        {% else %}
+        <b>No data</b>
+        {% endif %}
+        <b>{{ diagram.title }}</b>
+        <a href="{{ diagram.link }}" target="_blank">GWMR.wine</a>
+    </div>
+    {% endfor %}
+</div>

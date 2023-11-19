@@ -1,0 +1,36 @@
+{% extends "generator/base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load scripts %}
+
+{% block styles %}
+    {{ block.super }}
+    {% if preview %}
+        {% load sass_tags %}
+
+        <link href="{% sass_src "generator/styles/index.scss" %}" rel="stylesheet" />
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if form %}
+        {{ form }}
+    {% endif %}
+
+    {% if preview %}
+        <hr class="mt-4" />
+        <h3>{% translate "Preview" %}</h3>
+
+        <div class="container border report mt-3">
+            {{ preview | safe }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {% script "generator/js/lib/jquery/jquery-3.6.4.min.js" type="text/javascript" %}
+    {% script "generator/js/lib/select2/select2.min.js" type="text/javascript" %}
+    {% script "generator/js/basic.js" type="text/javascript" %}
+{% endblock %}

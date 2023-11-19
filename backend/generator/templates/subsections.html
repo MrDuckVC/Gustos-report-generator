@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-64">
+    {{ block.super }}
+    <form method="get" class="grid">
+        <div class="grid">
+            <div>
+                <p class="text-maroon">
+                    Report type
+                </p>
+                <select name="subsection">
+                    {% for subsection, info in subsections %}
+                    <option value="{{ subsection }}" {% if subsection == chose %} selected {% endif %}>{{ info.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {{ form|safe }}
+        </div>
+
+        <div class="actions pt-24">
+            <button type="submit" name="op" value="preview">
+                Preview
+            </button>
+        </div>
+
+        <div class="actions pt-24">
+            <button type="submit" name="op" value="generate-pdf">
+                Generate PDF
+            </button>
+        </div>
+    </form>
+</div>
+
+{% if result_data %}
+<div class="data report">
+    {{ result_data|safe }}
+</div>
+{% endif %}
+{% endblock %}

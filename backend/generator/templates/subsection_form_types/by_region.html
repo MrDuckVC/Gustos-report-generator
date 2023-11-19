@@ -1,0 +1,10 @@
+<div>
+    <p class="text-maroon">
+        {{ region_level }} ({{ chose_region }}):
+    </p>
+    <select name="{{ region_level }}">
+        {% for option in region_options %}
+        <option value="{{ option }}" {% if chose_region == option %} selected {% endif %}>{{ option }}</option>
+        {% endfor %}
+    </select>
+</div>

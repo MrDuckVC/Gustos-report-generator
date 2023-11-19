@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  nginx:
+    ports:
+      - "13002:80"
+    volumes:
+      - ./docker/nginx/conf.dev.d:/etc/nginx/conf.d:ro
+    networks:
+      - default
+
+  backend:
+    build:
+      args:
+        - VERSION=slim-dev
+    env_file:
+      - backend.env
+      - database.env
+    depends_on:
+      - db
+    networks:
+      - default
+
+  celery:
+    build:
+      args:
+        - VERSION=slim-dev
+    command: /usr/local/bin/celery -A main worker --concurrency=3 -l INFO -f /dev/stderr
+    env_file:
+      - backend.env
+      - database.env
+    depends_on:
+      - db
+    networks:
+      - default
+
+  db:
+    restart: unless-stopped
+    image: mariadb
+    volumes:
+      - ./docker/db/conf.d:/etc/mysql/conf.d
+      - ./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/db/data:/var/lib/mysql
+    env_file:
+      - database.env

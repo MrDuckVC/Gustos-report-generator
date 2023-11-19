@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<nav class="navbar navbar-expand-sm bg-light">
+    <div class="container container-fluid">
+        <a class="navbar-brand" href="/">Gustos Report Generator</a>
+
+        <ul class="navbar-nav navbar-collapse">
+            <li class="nav-item">
+                <a class="nav-link" href="/">{% translate "Home" %}</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">{% translate "Reports" %}</a>
+                <ul class="dropdown-menu">
+                    {% for section, subsections in sections %}
+                        <li><h5 class="dropdown-header">{{ section }}</h5></li>
+
+                        {% for subsection in subsections %}
+                            <li>
+                                <a class="dropdown-item {% if subsection.slug == "personal_winery_report" %} fw-bold {% endif %}" href="{% url "sections" subsection.slug %}">{{ subsection.name }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url "tasks" %}">{% translate "Tasks" %}</a>
+            </li>
+        </ul>
+    </div>
+</nav>

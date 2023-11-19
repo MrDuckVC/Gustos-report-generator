@@ -1,0 +1,173 @@
+{%block body%}
+<div class="print-only">
+    <div class="container">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="bb"></td>
+                </tr>
+
+                <tr>
+                    <td class="bb">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="w-50">
+                                        <p class="text-white">
+                                            8 General Medal Statistics
+                                        </p>
+                                        <p class="text-white">
+                                            8.1 Your Winery in various ratings
+                                        </p>
+                                        <p class="text-white">
+                                            8.2 Your Wines in various ratings
+                                        </p>
+
+                                        <p class="text-white">
+                                            8.3 Country/Region comparison
+                                        </p>
+
+                                        <p class="text-white">
+                                            8.4 Your Wines GWMR/Vivino correlation
+                                        </p>
+                                    </td>
+
+                                    <td class="w-50 text-right">
+                                        <h1 class="text-white text-right">
+                                            {{ winery_name }}
+                                        </h1>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h1 class="h1-extra text-white">
+                            PERSONAL WINERY REPORT
+                        </h1>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="bottom bb">
+                        <table class="flex">
+                            <tbody>
+                                <tr>
+                                    <td class="w-50 middle">
+                                        <p>
+                                            <strong class="text-uppercase text-white">
+                                                Global Wine <strong class="text-maroon">Medals</strong> & Competitions Report
+                                            </strong>
+                                        </p>
+                                    </td>
+                                    <td class="w-50 middle text-right">
+                                        <p class="text-white">
+                                            {{ year_from }} - {{ year_to }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="report">
+    {% include "header.html" %}
+
+    <div class="container report-type-0">
+        <table>
+            <colgroup>
+                <col width="60%">
+                <col width="40%">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td>
+                        <h2 class="mt-8 ml-20">General Medal Statistics {{ year_from }}-{{ year_to }}</h2>
+
+                        <div class="mt-4 ml-30">
+                            <h4>
+                                <strong class="h4">Producer country:</strong> <span>{{ producer_country }}</span>
+                            </h4>
+                        </div>
+
+                        <div class="mt-08 ml-30">
+                            <h4>
+                                <strong class="h4">Wine Origin:</strong> <span>{{ wine_origin }}</span>
+                            </h4>
+                        </div>
+
+                        <div class="mt-4 ml-30">
+                            <h4>
+                                <strong class="h4">Total Number of medals: {{ total_medals }}</strong>
+                            </h4>
+                            <ul class="list">
+                                <li>Higher than gold - {{ grand_medal }} ({{ percent_grand }}%)</li>
+                                <li>Gold - {{ gold_medal }} ({{ percent_gold }}%)</li>
+                                <li>Silver - {{ silver_medal }} ({{ percent_silver }}%)</li>
+                                <li>Bronze and lower - {{ bronze_medal }} ({{ percent_bronze }}%)</li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-4 ml-30">
+                            <h4>
+                                <strong class="h4">Number of awarded wines: {{ total_awarded_wines }}</strong>
+                            </h4>
+                            <ul class="list">
+                                <li>Still Red Blends - {{ stil_red_blends }} ({{ stil_red_blends_percent }}%)</li>
+                                <li>Still Red Single Variety - {{ stil_red_sv }} ({{ stil_red_sv_percent }}%)</li>
+                                <li>Still White Blends - {{ stil_white_blends }} ({{ stil_white_blends_percent }}%)</li>
+                                <li>Still White Single Variety - {{ stil_white_sv }} ({{ stil_white_sv_percent }}%)</li>
+                                <li>Still Rose Blends - {{ stil_rose_blends }} ({{ stil_rose_blends_percent }}%)</li>
+                                <li>Still Rose Single Variety - {{ stil_rose_sv }} ({{ stil_rose_sv_percent }}%)</li>
+                                <li>Sparkling & Pearl White - {{ sparklingpearl_white }} ({{ sparklingpearl_white_percent }}%)</li>
+                                <li>Sparkling & Pearl Rose - {{ sparklingpearl_rose }} ({{ sparklingpearl_rose_percent }}%)</li>
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div>
+                            {% if path_to_winery_logo %}
+                                <img class="report-winery-logo" src="{{ path_to_winery_logo }}" alt="" />
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <h4>
+                                <strong class="h4">Number of competitions: {{ total_competitions }}</strong>
+                            </h4>
+                            <ul class="list">
+                                {% for competition_quantity, continent in total_competitions_by_continent %}
+                                <li>{{ continent }} - {{ competition_quantity }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="mt-4">
+                            <h4>
+                                <strong class="h4">Number of Grape varieties of awarded wines: {{ total_grape_varieties }}</strong>
+                            </h4>
+                            <ul class="list">
+                                {% for data0, data1 in grape_varieties_by_type %}
+                                <li>{{ data1 }} - {{ data0 }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% include "footer.html" %}
+    {%endblock%}
+
+</div>

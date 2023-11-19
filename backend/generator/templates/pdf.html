@@ -1,0 +1,16 @@
+{% load sass_tags %}
+
+<html>
+
+    <head>
+        <meta name="pdfkit-page-size" content="Legal" />
+        <meta name="pdfkit-orientation" content="Landscape" />
+        <link href="{% sass_src "generator/styles/index.scss" %}" rel="stylesheet" />
+        <link href="{% sass_src "generator/styles/print.scss" %}" rel="stylesheet" />
+    </head>
+
+    <body class="printable-version report">
+        {{ result_data | safe }}
+    </body>
+
+</html>

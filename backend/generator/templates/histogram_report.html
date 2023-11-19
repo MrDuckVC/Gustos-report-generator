@@ -1,0 +1,4 @@
+{% for graphic in histograms %}
+    <h2>{{ graphic.name }}</h2>
+    <img src="{{ graphic.image_base64 }}" />
+{% endfor %}

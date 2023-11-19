@@ -1,0 +1,26 @@
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% translate "Preview" as preview_label %}
+{% translate "Generate" as generate_label %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% bootstrap_field form.subsection %}
+    <div class="row">
+        <div class="col">
+            {% bootstrap_field form.year_from %}
+        </div>
+        <div class="col">
+            {% bootstrap_field form.year_to %}
+        </div>
+    </div>
+    {% bootstrap_field form.country %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% bootstrap_button preview_label name="op" value="preview" %}
+        </div>
+    </div>
+</form>

@@ -1,0 +1,10 @@
+<script
+    src="{{ src }}"
+    {% if integrity %}
+        integrity="{{ integrity }}"
+    {% endif %}
+    {% for prop, value in kwargs %}
+        {{ prop }}="{{ value }}"
+    {% endfor %}
+>
+</script>

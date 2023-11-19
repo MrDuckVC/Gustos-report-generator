@@ -1,0 +1,119 @@
+{% block body %}
+{% include "header.html" %}
+
+<div class="container report report-type-3">
+    <table>
+        <tbody>
+            <tr>
+                <td class="w-33">
+                    <h2>
+                        Wine Events {{ year_from }} - {{ year_to }}
+                    </h2>
+                </td>
+
+                <td class="w-33">
+                    <h2>
+                        Your winery KPI is
+                    </h2>
+                    <p class="px-14 mt-2">
+                        {{ cat_country }}
+                    </p>
+                </td>
+
+                <td class="w-33">
+                    {% if region_name %}
+                        <h2>
+                            Your winery KPI is
+                        </h2>
+                        <p class="px-14 mt-2">
+                            {{ cat_region }}
+                        </p>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="w-33"></td>
+                <td class="w-33">
+                    <h2 class="mt-2 {% if average_value >= country_average_value %} green {% else %} red {% endif %}">
+                        {{ country_higher_lower_than_the_average }} %
+                    </h2>
+                </td>
+                <td class="w-33">
+                    {% if region_name %}
+                        <h2 class="mt-2 {% if average_value >= region_average_value %} green {% else %} red {% endif %}">
+                            {{ region_higher_lower_than_the_average }} %
+                        </h2>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="w-33">
+                    {% if path_to_winery_logo %}
+                        <img src="{{ path_to_winery_logo }}" alt="" />
+                    {% endif %}
+                </td>
+
+                <td class="w-33">
+                    <img src="{{ name_svg_country }}" alt="" />
+                </td>
+
+                <td class="w-33 {% if not region_name %} middle {% endif %}">
+                    {% if region_name %}
+                        <img src="{{ name_svg_region }}" alt="" />
+                    {% else %}
+                        <h2>No region comparison possible</h2>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="w-33">
+                    <h2>
+                        {{ total }}
+                    </h2>
+                </td>
+
+                <td class="w-33">
+                    <h2>
+                        {{ country_average }}
+                    </h2>
+                </td>
+
+                <td class="w-33">
+                    {% if region_name %}
+                        <h2>
+                            {{ region_average }}
+                        </h2>
+                    {% endif %}
+                </td>
+
+            </tr>
+            <tr>
+                <td class="w-33 px-14">
+                    <p>
+                        {{ total_description }}
+                    </p>
+                </td>
+
+                <td class="w-33 px-14">
+                    <p>
+                        {{ total_description }} for wineries in {{ winery_country }}
+                    </p>
+                </td>
+
+                <td class="w-33 px-14">
+                    {% if region_name %}
+                        <p>
+                            {{ total_description }} for wineries in {{ region_name }}
+                        </p>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

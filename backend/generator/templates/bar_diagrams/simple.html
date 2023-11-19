@@ -1,0 +1,14 @@
+<div>
+    <b>Attention, all data in percents</b>
+    <br>
+    {% for diagram in page_info %}
+    <div>
+        <h2>{{ diagram.title }}</h2>
+        {% if diagram.image %}
+        <img src="{{ diagram.image }}">
+        {% else %}
+        <b>No data</b>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>

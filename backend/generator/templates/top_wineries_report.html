@@ -1,0 +1,13 @@
+{% for winery in top_wineries %}
+    <div>
+        {% if winery.image %}
+            <img src="{{ winery.image }}" />
+        {% else %}
+            <h2>no logo</h2>
+        {% endif %}
+        <h3>{{ winery.name }}</h3>
+        <p>{{ winery.country }}</p>
+        <p>{{ winery.value }} {{ winery.value_name }}</p>
+    </div>
+    <hr>
+{% endfor %}

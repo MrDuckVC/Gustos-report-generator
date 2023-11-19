@@ -1,0 +1,67 @@
+{% extends "generator/base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load scripts %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+    <table class="table table-striped table-fixed">
+        <colgroup>
+            <col class="col-4">
+            <col class="col-3">
+            <col>
+            <col>
+            <col class="col-2">
+            <col class="col-2">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>{% translate "Name" %}</th>
+            <th>{% translate "Winery" %}</th>
+            <th>{% translate "From" %}</th>
+            <th>{% translate "To" %}</th>
+            <th>{% translate "Created at" %}</th>
+            <th>{% translate "Updated at" %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="me-2 text-truncate" data-bs-toggle="tooltip" title="{{ task.id }}"><a href="{% url "task" task.id %}">{{ task.id }}</a></div>
+                        <div>
+                            {% if task.status == "PENDING" %}
+                                <span class="badge bg-primary">{% translate "Pending" %}</span>
+                            {% elif task.status == "FAILED" %}
+                                <span class="badge bg-danger">{% translate "Failed" %}</span>
+                            {% elif task.status == "IN_PROGRESS" %}
+                                <span class="badge bg-primary">{% translate "In progress" %}</span>
+                            {% elif task.status == "FINISHED" %}
+                                <span class="badge bg-success">{% translate "Finished" %}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="text-truncate" data-bs-toggle="tooltip" title="{{ task.winery_name }}">{{ task.winery_name }}</div>
+                </td>
+                <td>{{ task.year_from }}</td>
+                <td>{{ task.year_to }}</td>
+                <td>{{ task.created }}</td>
+                <td>{{ task.updated }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% bootstrap_pagination tasks %}
+
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {% script "generator/js/bootstrap.js" type="text/javascript" %}
+{% endblock %}

@@ -1,0 +1,19 @@
+# Editors
+.vs
+.vscode
+*.code-workspace
+.idea
+.fleet
+
+# Mac OS
+.DS_Store
+
+# Sensitive generated files
+docker/db/data/
+
+# Celery
+celerybeat-schedule
+
+# Sensetive files
+*.env
+docker-compose.override.yml
